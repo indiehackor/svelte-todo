@@ -1,11 +1,18 @@
 <script>
+  import { onDestroy } from "svelte";
+  import { items, remove } from "../store.js";
   import Item from "./Item.svelte";
-  export let items;
+  let updatedItems;
 
-  export function handleDelete(item) {
-    items = items.filter(i => i !== item);
-    console.log(items.length);
-  }
+  const handleDelete = item => {
+    remove(item);
+  };
+
+  const unsubscribe = items.subscribe(update => {
+    updatedItems = update;
+  });
+
+  onDestroy(unsubscribe);
 </script>
 
 <style>
@@ -25,8 +32,8 @@
 </style>
 
 <ul>
-  {#each items as item}
-    <Item>
+  {#each updatedItems as item}
+    <Item color={item.color}>
       <div>
         <button on:click={() => handleDelete(item)} class="delete">⛔️</button>
         <span>{item.name}</span>

@@ -16,6 +16,6 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "npm run build && sirv public"
+    "start": "sirv public"
   }
 }

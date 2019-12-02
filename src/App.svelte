@@ -1,12 +1,18 @@
 <script>
+  import { add } from "./store.js";
   import List from "./components/List.svelte";
-  export let items;
   let value;
   let secret = 0;
 
+  const getColorValue = () => Math.floor(255 - Math.random() * 50);
+  let [R, G, B] = [255, 255, 255];
+
+  const getRGBA = () =>
+    `rgba(${getColorValue()}, ${getColorValue()}, ${getColorValue()})`;
+
   const handleAdd = e => {
     e.preventDefault();
-    if (value) items = [{ name: value, done: false }, ...items];
+    add({ name: value, done: false, color: getRGBA() });
     value = "";
   };
 
@@ -62,5 +68,5 @@
       </a>
     </p>
   {/if}
-  <List {items} />
+  <List />
 </main>

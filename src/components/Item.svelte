@@ -1,12 +1,5 @@
 <script>
-  let handler;
-
-  const getColorValue = () => Math.floor(255 - Math.random() * 50);
-  let [R, G, B] = [255, 255, 255];
-
-  const setRGB = () => {
-    [R, G, B] = [getColorValue(), getColorValue(), getColorValue()];
-  };
+  export let color;
 </script>
 
 <style>
@@ -23,6 +16,6 @@
   }
 </style>
 
-<li class="item" on:mouseenter={setRGB} style="background: rgb({R}, {G}, {B})">
+<li class="item" style="background: {color}">
   <slot />
 </li>
